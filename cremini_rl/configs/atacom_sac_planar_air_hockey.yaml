@@ -1,0 +1,31 @@
+accepted_risk: 0.9
+
+n_epochs: 100
+n_steps: 10000
+
+atacom_lam: 25
+atacom_beta: 3
+
+cost_budget: [1]
+
+initial_replay_size: 2000
+warmup_transitions: 2000
+max_replay_size: 200000
+
+learning_rate_constraint: 5.e-4
+
+learning_rate_actor: 5.e-4
+learning_rate_critic: 5.e-4
+
+lr_alpha: 5.e-4
+target_entropy: -3
+batch_size: 64
+
+use_cuda: False
+
+render: False
+n_episodes_test: 25
+
+init_delta: 3
+lr_delta: 0.05
+delta_warmup_transitions: 50000

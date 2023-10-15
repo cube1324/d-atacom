@@ -1,0 +1,20 @@
+cost_budget: [ 1 ]
+
+n_steps: 10000
+n_epochs: 100
+
+initial_replay_size: 2000
+max_replay_size: 200000
+
+warmup_transitions: 50000
+
+learning_rate_constraint: 5.e-4
+learning_rate_actor: 5.e-4
+learning_rate_critic: 5.e-4
+
+batch_size: 64
+
+use_cuda: False
+
+render: False
+n_episodes_test: 25

@@ -1,0 +1,20 @@
+n_epochs: 100
+n_steps: 10000
+n_episodes_test: 25
+quiet: True
+use_cuda: False
+render: False
+
+learning_rate_actor: 5.e-4
+learning_rate_critic: 5.e-4
+learning_rate_constraint: 5.e-4
+
+n_features_actor: '128 128'
+n_features_critic: '128 128'
+n_features_constraint: '128 128'
+
+initial_replay_size: 2000
+max_replay_size: 200000
+batch_size: 64
+
+tau: 1.e-3

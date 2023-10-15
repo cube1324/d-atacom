@@ -1,0 +1,5 @@
+quantile_embedding_dim: 64
+num_quantile_samples: 32
+num_next_quantile_samples: 32
+
+n_features_constraint: "128 128 128"

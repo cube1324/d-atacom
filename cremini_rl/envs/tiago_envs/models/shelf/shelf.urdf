@@ -1,0 +1,228 @@
+<?xml version="0.0" ?>
+<robot name="shelf_real">
+  <link name="baseLink">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="back_plank.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="back_plank.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="bottom_drawer_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <parent link="baseLink"/>
+        <child link="bottom_drawer"/>
+        <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="bottom_drawer">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="bottom_drawer.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="bottom_drawer.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="left_plank_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <parent link="baseLink"/>
+        <child link="left_plank"/>
+        <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="left_plank">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="left_plank.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="left_plank.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="right_plank_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <parent link="baseLink"/>
+        <child link="right_plank"/>
+        <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="right_plank">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="right_plank.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="right_plank.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="middle_plank_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <parent link="baseLink"/>
+        <child link="middle_plank"/>
+        <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="middle_plank">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="middle_plank.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="middle_plank.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="baffle_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <parent link="baseLink"/>
+        <child link="baffle"/>
+        <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="baffle">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="baffle.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="baffle.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="baffle_middle_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
+        <parent link="baseLink"/>
+        <child link="baffle_middle"/>
+        <axis xyz="0 0 1" />
+  </joint>
+
+  <link name="baffle_middle">
+    <contact>
+      <lateral_friction value="1.0"/>
+    </contact>
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+       <mass value="1.0"/>
+       <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	<mesh filename="baffle_middle.obj" scale="1 1 1"/>
+      </geometry>
+       <material name="white">
+        <color rgba="1 0.95 0.9 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+	 <mesh filename="baffle_middle.obj" scale="1 1 1"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
+
+

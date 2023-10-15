@@ -1,0 +1,6 @@
+delta: 1.e-6
+n_epochs: 500
+
+max_replay_size: 200000
+warmup_transitions: 5000
+learning_rate_constraint: 5.e-4

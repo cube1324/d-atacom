@@ -1,0 +1,20 @@
+n_epochs: 100
+n_steps: 10000
+
+initial_replay_size: 10000
+warmup_transitions: 10000
+constraint_init_size: 10000
+constraint_max_size: 200000
+max_replay_size: 200000
+
+learning_rate_actor: 2.e-4
+learning_rate_critic: 2.e-4
+
+batch_size: 64
+lr_alpha: 3.e-5
+target_entropy: -3
+
+use_cuda: False
+
+render: False
+n_episodes_test: 25

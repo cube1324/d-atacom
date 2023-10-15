@@ -1,0 +1,28 @@
+[project]
+name = "cremini-rl"
+version = "0.1.0"
+description = "Safe RL libary "
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "airhockeychallenge",
+    "cremini-rl",
+    "cvxpylayers>=0.1.6",
+    "dm-control>=1.0.8",
+    "experiment-launcher==2.3",
+    "hiyapyco>=0.6.1",
+    "mushroom-rl==1.10.1",
+    "numba>=0.60.0",
+    "numpy==1.26.4",
+    "omnisafe",
+    "pybullet>=3.2.6",
+]
+
+[tool.uv.sources]
+cremini-rl = { workspace = true }
+airhockeychallenge = { git = "https://github.com/AirHockeyChallenge/air_hockey_challenge.git" }
+omnisafe = { git = "https://github.com/cube1324/omnisafe.git" }
+
+[tool.uv]
+package=true
+no-build-isolation-package = ["pybullet"]

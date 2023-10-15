@@ -1,0 +1,14 @@
+n_epochs: 100
+n_steps: 10000
+
+n_episodes_test: 15
+
+atacom_lam: 50
+atacom_beta: 1.0
+accepted_risk: 0.5
+
+cost_budget: 5
+
+init_delta: 1
+lr_delta: 0.1
+delta_warmup_transitions: 50000

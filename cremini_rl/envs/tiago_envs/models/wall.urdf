@@ -1,0 +1,93 @@
+<?xml version="0.0" ?>
+<robot name="wall">
+    <link name="base_link">
+    </link>
+    <joint name="left_wall_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 2.7 0.2"/>
+        <parent link="base_link"/>
+        <child link="wall_left"/>
+        <axis xyz="0 0 1" />
+    </joint>
+    <link name="wall_left">
+        <mass value="1"/>
+        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+        <visual>
+            <geometry>
+                <box size="7 0.4 0.4"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="0.96 0.64 0.37 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="7 0.4 0.4"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="right_wall_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 -2.7 0.2"/>
+        <parent link="base_link"/>
+        <child link="wall_right"/>
+    </joint>
+    <link name="wall_right">
+        <visual>
+            <geometry>
+                <box size="7 0.4 0.4"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="0.96 0.64 0.37 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="7 0.4 0.4"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="front_wall_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="3.7 0.0 0.2"/>
+        <parent link="base_link"/>
+        <child link="wall_front"/>
+    </joint>
+    <link name="wall_front">
+        <visual>
+            <geometry>
+                <box size="0.4 5.8 0.4"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="0.96 0.64 0.37 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.4 5.4 0.4"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="back_wall_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="-3.7 0 0.2"/>
+        <parent link="base_link"/>
+        <child link="wall_back"/>
+    </joint>
+    <link name="wall_back">
+        <visual>
+            <geometry>
+                <box size="0.4 5.8 0.4"/>
+            </geometry>
+            <material name="yellow">
+                <color rgba="0.96 0.64 0.37 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.4 5.4 0.4"/>
+            </geometry>
+        </collision>
+    </link>
+
+</robot>
+

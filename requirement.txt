@@ -1,0 +1,11 @@
+airhockeychallenge @ git+https://github.com/AirHockeyChallenge/air_hockey_challenge.git
+omnisafe @ git+https://github.com/cube1324/omnisafe.git
+cvxpylayers>=0.1.6
+dm-control>=1.0.8
+experiment-launcher==2.3
+hiyapyco>=0.6.1
+mushroom-rl==1.10.1
+numba>=0.60.0
+numpy==1.26.4
+pybullet>=3.2.6
+-e .
