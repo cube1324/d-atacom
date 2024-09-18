@@ -18,13 +18,13 @@ def agent_builder(alg, mdp, control_system, **kwargs):
     if alg == "sac":
         return build_sac(mdp, **kwargs)
 
-    if alg == "atacom_sac":
+    if alg == "datacom_sac":
         return build_atacom_sac(mdp, control_system, **kwargs)
 
     if alg == "cbf_sac":
         return build_cbf_sac(mdp, control_system, **kwargs)
 
-    if alg == "iqn_atacom_sac":
+    if alg == "iqn_datacom_sac":
         return build_iqn_atacom_sac(mdp, control_system, **kwargs)
 
     if alg == "baseline-atacom_sac":

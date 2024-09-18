@@ -1,5 +1,5 @@
 lr_beta: 5.e-4
-cost_limit: 5
+cost_limit: 0
 damp_scale: 1
 learning_rate_constraint: 5.e-4
 
@@ -12,5 +12,5 @@ learning_rate_actor: 5.e-4
 learning_rate_critic: 5.e-4
 
 lr_alpha: 5.e-4
-target_entropy: -1
+target_entropy: -3
 

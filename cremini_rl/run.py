@@ -7,9 +7,13 @@ import os
 
 
 def main():
+    # Choices: cartpole, tiago_navigation, planar_air_hockey, dense_ball2d, goal_navigation,
     env = "planar_air_hockey"
-    alg = "atacom_sac"
+    # Choices: sac, td3, datacom_sac, iqn_datacom_sac, safelayer_td3, lag_sac, wc_lag_sac, cbf_sac, baseline-atacom_sac
+    alg = "iqn_datacom_sac"
 
+    # Load configs based on the algorithm and environment, there are defaults for each algorithm. They are merged
+    # with the environment specific config if it exists.
     configs = [os.path.join("configs", "defaults", f"{part}.yaml") for part in alg.split("_")]
 
     if os.path.exists(os.path.join("configs", f"{alg}_{env}.yaml")):
@@ -17,6 +21,7 @@ def main():
 
     config = hiyapyco.load(os.path.join("configs", "defaults", "defaults.yaml"), *configs)
 
+    # Check if on a slurm cluster or local machine
     local = is_local()
     if local:
         debug = False

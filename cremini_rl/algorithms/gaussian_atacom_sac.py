@@ -18,7 +18,7 @@ from inspect import signature
 
 from scipy.stats import norm
 
-from cremini_rl.utils.null_space import batch_smooth_basis_tensor, batch_smooth_basis
+from cremini_rl.utils.null_space import batch_smooth_basis
 
 from cremini_rl.utils.constraint_replay_memory import SafeReplayMemory
 
@@ -514,13 +514,6 @@ class GaussianAtacomSAC(DeepAC):
 
         self._log_alpha = torch.tensor(0., dtype=torch.float32)
         self._delta_value = torch.tensor(np.maximum(init_delta, 0.1), dtype=torch.float32)
-        # self._delta_value = torch.tensor(torch.log(torch.expm1(init_delta)), dtype=torch.float32)
-
-        # x = torch.tensor(1.87 * policy._margin, dtype=torch.float32)
-        # # inverse of softplus
-        # accepted_risk_equalizer = x + torch.log(-torch.expm1(-x))
-
-        # self._delta_value += accepted_risk_equalizer
 
         self._log_alpha.requires_grad_()
         self._delta_value.requires_grad_()
@@ -614,9 +607,6 @@ class GaussianAtacomSAC(DeepAC):
             self._constraint_approximator.model._optimizer.step()
 
             self.training_loss.append(loss.detach().item())
-            # self.cbf_reg_loss.append(reg_loss.detach().item())
-
-            # self.lr_schedueler.step()
 
             self._update_target(self._constraint_approximator, self._target_constraint_approximator)
             self._update_target(self._critic_approximator, self._target_critic_approximator)
@@ -680,9 +670,6 @@ class GaussianAtacomSAC(DeepAC):
             torch.tensor(epi_states).to(self.device)).detach().cpu() + self.delta().detach() - self.delta()
         self._delta_optim.zero_grad()
 
-        # cum_cost = np.sum(self._episode_costs)
-        # loss = self.delta() * (cum_cost - self._cost_budget - 1) * (1 + np.clip(c_epi.mean(), -1, 0))
-
         cum_cost = 0
         cum_costs = []
         for cost in np.array(self._episode_costs)[::-1]:
@@ -690,17 +677,12 @@ class GaussianAtacomSAC(DeepAC):
             cum_costs.append(cum_cost)
         cum_costs = np.array(cum_costs)[::-1]
         cum_costs = torch.tensor(cum_costs.copy(), dtype=torch.float)
-        # loss = -self.delta() * (c_epi + self.delta().detach() - self.delta() - (cum_costs - self._cost_budget - 1)).mean()
-        # loss = -self.delta() * (c_epi - (cum_costs - self._cost_budget)).mean()
-        # loss = -self.delta() * (torch.maximum(c_epi + self.delta().detach() - self.delta(), torch.tensor(0.))
-        #                         - cum_costs + 1).mean()
+
         loss = F.smooth_l1_loss(cum_costs - self._cost_budget, c_epi.flatten(), reduction='mean')
 
         loss.backward()
 
         self._delta_optim.step()
-        info = f"Delta: {self.delta().detach().item():.4f}, cum_cost: {cum_cost:.4f}, c_epi: {c_epi.mean():.4f}, cost_budget: {self._cost_budget:.4f}"
-        # print(info)
 
     def _next_q(self, next_state, absorbing):
         """
@@ -763,7 +745,6 @@ class GaussianAtacomSAC(DeepAC):
 
         predicted_mean = predicted_cost[0]
         predicted_mean_detach = predicted_mean.detach()
-        # predicted_var = (2 * predicted_cost[1]).exp().flatten()
 
         target_mean = cost + (1 - absorbing) * gamma * next_mean
         J_mu = F.mse_loss(predicted_mean, target_mean, reduction=reduction)
@@ -779,10 +760,6 @@ class GaussianAtacomSAC(DeepAC):
 
         target_var = (1 - absorbing) * target_var_not_absorbing + absorbing * target_var_absorbing
 
-        # J_sigma = target_var + predicted_var - 2 * torch.sqrt(target_var * predicted_var)
         J_sigma = F.mse_loss(predicted_cost[1].exp(), torch.sqrt(target_var), reduction=reduction)
-
-        # if reduction == 'mean':
-        #     J_sigma = torch.mean(J_sigma)
 
         return J_mu + J_sigma

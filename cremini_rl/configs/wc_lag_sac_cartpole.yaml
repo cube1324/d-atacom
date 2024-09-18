@@ -1,5 +1,5 @@
 lr_beta: 5.e-4
-cost_limit: [0.1, 25]
+cost_limit: 5
 damp_scale: 1
 learning_rate_constraint: 5.e-4
 

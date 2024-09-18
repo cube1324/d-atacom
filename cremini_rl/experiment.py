@@ -19,6 +19,7 @@ import wandb
 import argparse
 
 import numpy as np
+from copy import deepcopy
 
 from joblib import Parallel, delayed
 
@@ -338,9 +339,9 @@ def parse_args():
     arg_exp = parser.add_argument_group('Experiment')
 
     arg_exp.add_argument("--env_name", type=str)
-    arg_exp.add_argument("--alg", choices=["sac", "td3", "atacom_sac", 'iqn_atacom_sac', "atacom_td3",
-                                           "safelayer_td3", "lag_sac", "wc_lag_sac", 'old_atacom_td3', "new_atacom_td3",
-                                           "gatacom_sac", 'cbf_sac', "baseline-atacom_sac"])
+    arg_exp.add_argument("--alg", choices=["sac", "td3", "datacom_sac", 'iqn_datacom_sac',
+                                           "safelayer_td3", "lag_sac", "wc_lag_sac",
+                                           'cbf_sac', "baseline-atacom_sac"])
 
     arg_exp.add_argument("--n_epochs", type=int)
     arg_exp.add_argument("--n_steps", type=int)
