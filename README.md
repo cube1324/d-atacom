@@ -1,6 +1,6 @@
 # Handling Long-Term Safety and Uncertainty in Safe Reinforcement Learning
 
-Code for the [paper](www.google.com) Handling Long-Term Safety and Uncertainty in Safe Reinforcement Learning. 
+Code for the [paper](https://arxiv.org/abs/2409.12045) Handling Long-Term Safety and Uncertainty in Safe Reinforcement Learning. 
 
 <p align="center">
 <img src=figs/air_hockey.gif height="280">
@@ -25,5 +25,6 @@ To run the algorithms on a new environment add it to the `build_mdp` function in
 The environment should be a subclass of `mushroom_rl.core.Environment`. The environment `cremini_rl\envs\goal_navigation_env.py` is an example of a environment wrapper for safety gymnasium.
 
 For `D-ATACOM`, `IQN-ATACOM`, `CBF-SAC` the dynamics of the agent are also required. They should be a subclass of `cremini_rl.dynamics.dynamics.ControlAffineSystem`.  
+
 
 
