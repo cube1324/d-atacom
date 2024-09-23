@@ -12,10 +12,10 @@ from mushroom_rl.utils.parameters import to_parameter
 from mushroom_rl.utils.replay_memory import ReplayMemory
 
 from cremini_rl.utils.constraint_replay_memory import SafeReplayMemory
-from cremini_rl.algorithms.gaussian_atacom_sac import AtacomSACPolicy, GaussianAtacomSAC
+from cremini_rl.algorithms.datacom_sac import DatacomSACPolicy, DatacomSAC
 
 
-class AtacomIQNSACPolicy(AtacomSACPolicy):
+class DatacomIQNSACPolicy(DatacomSACPolicy):
     def __init__(self, mu_approximator, sigma_approximator, constraint_approximator, control_system, mdp_info,
                  accepted_risk, delta, atacom_lam, atacom_beta, target_entropy, min_a, max_a, log_std_min, log_std_max):
         self._risk_logit = torch.tensor(np.log(accepted_risk / (1 - accepted_risk))).float()
@@ -58,7 +58,7 @@ class AtacomIQNSACPolicy(AtacomSACPolicy):
         return torch.sigmoid(self._risk_logit)
 
 
-class IQNAtacomSAC(GaussianAtacomSAC):
+class IQNAtacomSAC(DatacomSAC):
     def __init__(self, mdp_info, control_system, accepted_risk, actor_mu_params, actor_sigma_params, actor_optimizer,
                  critic_params, batch_size, initial_replay_size, max_replay_size, warmup_transitions, tau, lr_alpha,
                  cost_budget, constraint_params, atacom_lam, atacom_beta,
@@ -141,12 +141,12 @@ class IQNAtacomSAC(GaussianAtacomSAC):
         self._init_target(self._critic_approximator, self._target_critic_approximator)
         self._init_target(self._constraint_approximator, self._target_constraint_approximator)
 
-        policy = AtacomIQNSACPolicy(actor_mu_approximator, actor_sigma_approximator,
-                                    self._constraint_approximator, control_system, mdp_info, accepted_risk, self.delta,
-                                    atacom_lam,
-                                    atacom_beta, self._target_entropy, mdp_info.action_space.low,
-                                    mdp_info.action_space.high,
-                                    log_std_min, log_std_max)
+        policy = DatacomIQNSACPolicy(actor_mu_approximator, actor_sigma_approximator,
+                                     self._constraint_approximator, control_system, mdp_info, accepted_risk, self.delta,
+                                     atacom_lam,
+                                     atacom_beta, self._target_entropy, mdp_info.action_space.low,
+                                     mdp_info.action_space.high,
+                                     log_std_min, log_std_max)
 
         self._log_alpha = torch.tensor(0., dtype=torch.float32)
         self._delta_value = torch.tensor(np.maximum(init_delta, 0.1), dtype=torch.float32)
@@ -190,7 +190,7 @@ class IQNAtacomSAC(GaussianAtacomSAC):
             _num_next_quantile_samples='primitive',
         )
 
-        super(GaussianAtacomSAC, self).__init__(mdp_info, policy, actor_optimizer, policy_parameters)
+        super(DatacomSAC, self).__init__(mdp_info, policy, actor_optimizer, policy_parameters)
 
     def fit(self, dataset, **info):
         self._add_episode_cost(dataset)

@@ -19,7 +19,7 @@ uv run run.py
 ```
 To use different environments or algorithms, modify the `run.py` file. 
 The package cremini_rl is based on the [mushroom_rl](https://github.com/MushroomRL/mushroom-rl) framework and contains the implementation of D-ATACOM as well as several Safe RL baselines. 
-Currently `D-ATACOM`, `LagSAC`, `WCSAC`, `SafeLayerTD3`, `CBF-SAC`, `ATACOM`, `IQN-ATACOM`
+Currently `D-ATACOM`, `LagSAC`, `WCSAC`, `SafeLayerTD3`, `CBF-SAC`, `ATACOM`, `IQN-ATACOM` are implemented.
 ## Adding new Environments
 To run the algorithms on a new environment add it to the `build_mdp` function in `cremini_rl/experiment.py`. 
 The environment should be a subclass of `mushroom_rl.core.Environment`. The environment `cremini_rl\envs\goal_navigation_env.py` is an example of a environment wrapper for safety gymnasium.

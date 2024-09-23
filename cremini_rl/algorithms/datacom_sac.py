@@ -23,7 +23,7 @@ from cremini_rl.utils.null_space import batch_smooth_basis
 from cremini_rl.utils.constraint_replay_memory import SafeReplayMemory
 
 
-class AtacomSACPolicy(Policy):
+class DatacomSACPolicy(Policy):
     """
     Class used to implement the policy used by the Soft Actor-Critic algorithm.
     The policy is a Gaussian policy squashed by a tanh. This class implements the compute_action_and_log_prob and the
@@ -417,7 +417,7 @@ class AtacomSACPolicy(Policy):
                      self._sigma_approximator.model.network.parameters())
 
 
-class GaussianAtacomSAC(DeepAC):
+class DatacomSAC(DeepAC):
     """
     Soft Actor-Critic algorithm.
     "Soft Actor-Critic Algorithms and Applications".
@@ -505,12 +505,12 @@ class GaussianAtacomSAC(DeepAC):
         self._init_target(self._critic_approximator, self._target_critic_approximator)
         self._init_target(self._constraint_approximator, self._target_constraint_approximator)
 
-        policy = AtacomSACPolicy(actor_mu_approximator, actor_sigma_approximator,
-                                 self._constraint_approximator, control_system, mdp_info, accepted_risk, self.delta,
-                                 atacom_lam,
-                                 atacom_beta, self._target_entropy, mdp_info.action_space.low,
-                                 mdp_info.action_space.high,
-                                 log_std_min, log_std_max, analytical_constraint)
+        policy = DatacomSACPolicy(actor_mu_approximator, actor_sigma_approximator,
+                                  self._constraint_approximator, control_system, mdp_info, accepted_risk, self.delta,
+                                  atacom_lam,
+                                  atacom_beta, self._target_entropy, mdp_info.action_space.low,
+                                  mdp_info.action_space.high,
+                                  log_std_min, log_std_max, analytical_constraint)
 
         self._log_alpha = torch.tensor(0., dtype=torch.float32)
         self._delta_value = torch.tensor(np.maximum(init_delta, 0.1), dtype=torch.float32)

@@ -10,7 +10,7 @@ def main():
     # Choices: cartpole, tiago_navigation, planar_air_hockey, dense_ball2d, goal_navigation,
     env = "planar_air_hockey"
     # Choices: sac, td3, datacom_sac, iqn_datacom_sac, safelayer_td3, lag_sac, wc_lag_sac, cbf_sac, baseline-atacom_sac
-    alg = "iqn_datacom_sac"
+    alg = "datacom_sac"
 
     # Load configs based on the algorithm and environment, there are defaults for each algorithm. They are merged
     # with the environment specific config if it exists.

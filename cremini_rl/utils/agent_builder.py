@@ -19,13 +19,13 @@ def agent_builder(alg, mdp, control_system, **kwargs):
         return build_sac(mdp, **kwargs)
 
     if alg == "datacom_sac":
-        return build_atacom_sac(mdp, control_system, **kwargs)
+        return build_datacom_sac(mdp, control_system, **kwargs)
 
     if alg == "cbf_sac":
         return build_cbf_sac(mdp, control_system, **kwargs)
 
     if alg == "iqn_datacom_sac":
-        return build_iqn_atacom_sac(mdp, control_system, **kwargs)
+        return build_iqn_datacom_sac(mdp, control_system, **kwargs)
 
     if alg == "baseline-atacom_sac":
         return build_baseline_atacom_sac(mdp, control_system, **kwargs)
@@ -237,11 +237,11 @@ def build_sac(mdp, initial_replay_size, max_replay_size, batch_size, n_features_
     return agent
 
 
-def build_atacom_sac(mdp, control_system, initial_replay_size, max_replay_size, batch_size, n_features_actor,
-                     n_features_critic, n_features_constraint, learning_rate_actor, learning_rate_critic,
-                     accepted_risk, learning_rate_constraint,
-                     atacom_lam, atacom_beta, use_cuda, tau, lr_alpha, target_entropy,
-                     warmup_transitions, cost_budget, lr_delta, init_delta, delta_warmup_transitions, **kwargs):
+def build_datacom_sac(mdp, control_system, initial_replay_size, max_replay_size, batch_size, n_features_actor,
+                      n_features_critic, n_features_constraint, learning_rate_actor, learning_rate_critic,
+                      accepted_risk, learning_rate_constraint,
+                      atacom_lam, atacom_beta, use_cuda, tau, lr_alpha, target_entropy,
+                      warmup_transitions, cost_budget, lr_delta, init_delta, delta_warmup_transitions, **kwargs):
     constraint_params = build_constraint(control_system, "gaussian",
                                          learning_rate_constraint, n_features_constraint, use_cuda)
 
@@ -252,14 +252,14 @@ def build_atacom_sac(mdp, control_system, initial_replay_size, max_replay_size, 
     if hasattr(mdp, "analytical_constraint"):
         alg_params["analytical_constraint"] = mdp.analytical_constraint
 
-    agent = GaussianAtacomSAC(mdp_info=mdp.info, control_system=control_system, accepted_risk=accepted_risk,
-                              actor_mu_params=actor_mu_params, actor_sigma_params=actor_sigma_params,
-                              actor_optimizer=actor_optimizer, critic_params=critic_params, batch_size=batch_size,
-                              initial_replay_size=initial_replay_size, max_replay_size=max_replay_size,
-                              cost_budget=cost_budget, constraint_params=constraint_params, atacom_lam=atacom_lam,
-                              atacom_beta=atacom_beta, lr_delta=lr_delta, init_delta=init_delta,
-                              delta_warmup_transitions=delta_warmup_transitions,
-                              **alg_params)
+    agent = DatacomSAC(mdp_info=mdp.info, control_system=control_system, accepted_risk=accepted_risk,
+                       actor_mu_params=actor_mu_params, actor_sigma_params=actor_sigma_params,
+                       actor_optimizer=actor_optimizer, critic_params=critic_params, batch_size=batch_size,
+                       initial_replay_size=initial_replay_size, max_replay_size=max_replay_size,
+                       cost_budget=cost_budget, constraint_params=constraint_params, atacom_lam=atacom_lam,
+                       atacom_beta=atacom_beta, lr_delta=lr_delta, init_delta=init_delta,
+                       delta_warmup_transitions=delta_warmup_transitions,
+                       **alg_params)
 
     return agent
 
@@ -297,13 +297,13 @@ def build_cbf_sac(mdp, control_system, initial_replay_size, max_replay_size, bat
     return agent
 
 
-def build_iqn_atacom_sac(mdp, control_system, initial_replay_size, max_replay_size, batch_size, n_features_actor,
-                         n_features_critic, n_features_constraint, learning_rate_actor, learning_rate_critic,
-                         learning_rate_constraint, accepted_risk,
-                         atacom_lam, atacom_beta, use_cuda, tau, lr_alpha, target_entropy, warmup_transitions,
-                         quantile_embedding_dim, num_quantile_samples,
-                         num_next_quantile_samples,
-                         cost_budget, lr_delta, init_delta, delta_warmup_transitions, **kwargs):
+def build_iqn_datacom_sac(mdp, control_system, initial_replay_size, max_replay_size, batch_size, n_features_actor,
+                          n_features_critic, n_features_constraint, learning_rate_actor, learning_rate_critic,
+                          learning_rate_constraint, accepted_risk,
+                          atacom_lam, atacom_beta, use_cuda, tau, lr_alpha, target_entropy, warmup_transitions,
+                          quantile_embedding_dim, num_quantile_samples,
+                          num_next_quantile_samples,
+                          cost_budget, lr_delta, init_delta, delta_warmup_transitions, **kwargs):
     constraint_params = build_constraint(control_system, 'quantile',
                                          learning_rate_constraint, n_features_constraint, use_cuda)
 
